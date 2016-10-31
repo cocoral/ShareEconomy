@@ -1,0 +1,19 @@
+
+body{
+  background-color:lightblue;
+}
+
+.shared-item{
+  background-color: white;
+  margin-bottom: 1rem;
+  display: inline-block;
+  float: left;
+  width: calc(50% - .5rem);
+  padding: 1rem;
+  &:nth-child(2n-1){
+    margin-right: .5rem;
+  }
+  &:nth-child(2n){
+    margin-left: .5rem;
+  }
+}
