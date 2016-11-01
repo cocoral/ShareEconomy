@@ -23,6 +23,9 @@ class App extends React.Component{
 
         <div className='sharedItems'>
           { Object.keys(renderItems).map((id)=> {
+            var endTime = renderItems[id]['end-time']
+            var currentTime = new Date().getTime();
+            if (endTime - currentTime > 0){
             return(
               <div key={ id } className="shared-item">
                 <SharedItem
@@ -36,7 +39,7 @@ class App extends React.Component{
                   endDate = { renderItems[id]['readable-end-date'] }
                 />
               </div>
-            )
+            )}
           })}
         </div>
 
