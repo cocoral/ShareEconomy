@@ -17,11 +17,9 @@ class App extends React.Component{
 
   render(){
     var renderItems = this.state.items;
-    // console.log(renderItems)
     return (
       <div className='app'>
         <AddItem />
-
 
         <div className='sharedItems'>
           { Object.keys(renderItems).map((id)=> {
@@ -29,33 +27,19 @@ class App extends React.Component{
               <div key={ id } className="shared-item">
                 <SharedItem
                   id = { id }
+                  thisItem = { renderItems[id] }
                   name = { renderItems[id].name }
                   description = { renderItems[id].description }
+                  postTime = { renderItems[id]['post-time'] }
+                  endTime = { renderItems[id]['end-time'] }
                   postDate = { renderItems[id]['readable-post-date'] }
                   endDate = { renderItems[id]['readable-end-date'] }
                 />
               </div>
-            //  <div key={ id } className="shared-item">
-            //
-            //   <div className='name'>
-            //     <h3>{ renderItems[id].name }</h3>
-            //   </div>
-            //   <div className='intro'>
-            //     <p>{ renderItems[id].description }</p>
-            //   </div>
-            //   <div className='post-date'>
-            //     <p>post on { renderItems[id]['post-time'] }</p>
-            //   </div>
-            //   <div className='available-date'>
-            //     <p>available until { renderItems[id]['readable-end-date'] }</p>
-            //   </div>
-            // </div>
-            //
             )
-
-
           })}
         </div>
+
       </div>
     )
   }

@@ -12,13 +12,13 @@ class AddItem extends React.Component{
         'end-time' : '',
         'readable-post-date' : '',
         'readable-end-date' : '',
-        'booktime': [],
-        'available-time' : 1,
+        'booked-time': [],
+        'available-time': [],
+        'rent-time' : 1,
       },
     }
     this.postItem = this.postItem.bind(this);
     this.updateField = this.updateField.bind(this);
-    this.toggleAvailableTime = this.toggleAvailableTime.bind(this);
     this.updateTime = this.updateTime.bind(this);
 
   }
@@ -32,7 +32,7 @@ class AddItem extends React.Component{
     var postYear = new Date(currentTime).getFullYear();
     var postMonth = new Date(currentTime).getMonth() + 1;
     var postDay = new Date(currentTime).getDate();
-    var rentTime = parseInt(newItem['available-time']);
+    var rentTime = parseInt(newItem['rent-time']);
     var rentTimeBySeconds = rentTime*1000*60*60*24;
     var endTime = currentTime + rentTimeBySeconds;
     var endYear = new Date(endTime).getFullYear();
@@ -41,20 +41,17 @@ class AddItem extends React.Component{
 
     newItem['post-time'] = currentTime;
     newItem['end-time'] = endTime;
+    newItem['booked-time'] = [];
+    newItem['available-time'] = [[currentTime,endTime]];
     newItem['readable-post-date'] = `${postMonth} / ${postDay} / ${postYear}`;
     newItem['readable-end-date'] = `${endMonth} / ${endDay} / ${endYear}`;
+
     this.firebaseRef.push(newItem);
   }
 
   updateField(evt){
     var newItem = this.state.newItem;
     newItem[evt.target.name] = evt.target.value;
-    this.setState({newItem: newItem});
-  }
-
-  toggleAvailableTime(evt){
-    var newItem = this.state.newItem;
-    newItem[evt.target.name] = !newItem[evt.target.name];
     this.setState({newItem: newItem});
   }
 
@@ -76,7 +73,7 @@ class AddItem extends React.Component{
           <input type='text' name='description' id='item-description' onChange = {this.updateField} />
           <fieldset>
             <p> Available Time: </p>
-            <select name='available-time' id='available-time' onChange = {this.updateTime}>
+            <select name='rent-time' id='rent-time' onChange = {this.updateTime}>
               <option value="1">1 day</option>
               <option value="2">2 days</option>
               <option value="3">3 days</option>
