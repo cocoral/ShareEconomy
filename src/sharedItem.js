@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-
+import moment from 'moment';
 
 class SharedItem extends React.Component{
 
@@ -33,6 +33,7 @@ class SharedItem extends React.Component{
     var currentTime = new Date().getTime();
     console.log(currentTime, endTime)
     var timeDifferenceInDays = (endTime - currentTime) / 1000 / 60 / 60 / 24;
+    var availableDay = []
 
     return Math.floor(timeDifferenceInDays)
   }
